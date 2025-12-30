@@ -40,7 +40,19 @@ export default function Header() {
     <header className="site-header">
       <div className="brand" onClick={() => navigate('/') }>
         <div className="logo-image">
-          <img src="/images/logo.jpg" alt="Royal Volubiks Jewelries" />
+          <img
+            src="/images/logo.jpg"
+            alt="Royal Volubiks Jewelries"
+            onError={(e) => {
+              // Try SVG fallback once; hide image if both missing
+              if (!e.currentTarget.dataset.fallback) {
+                e.currentTarget.dataset.fallback = 'true';
+                e.currentTarget.src = '/images/logo.svg';
+              } else {
+                e.currentTarget.style.display = 'none';
+              }
+            }}
+          />
         </div>
       </div>
 
